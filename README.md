@@ -2,7 +2,4 @@
 
 Aufnahme von elektrischen Signalen von Muskeln, um mithilfe eines neuronalen Netzes Handzeichen zu erkennnen.
 
-
-Das ist der experimentelle Branch!
-
-Update 2: Gebt mir ein H!
+Update 1: Back to the roots!
