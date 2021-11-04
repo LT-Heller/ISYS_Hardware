@@ -99,9 +99,44 @@ void toggle_GAL_SIG(void){
 
 
 /****************************************************/
-/*  Function name: setup                            */
+/*  Function name: Timer2_Overflow_ISR              */
 /*  Parameters                                      */
 /*    Input   :  No	                            */
+/*    Output  :  No                                 */
+/*    Action: Determines ADC sampling frequency.    */
+/****************************************************/
+void Timer2_Overflow_ISR()
+{
+  // Toggle LED1 with ADC sampling frequency /2
+  Toggle_LED1();
+  
+  //Read the 6 ADC inputs and store current values in Packet
+  for(CurrentCh=0;CurrentCh<6;CurrentCh++){
+    ADC_Value = analogRead(CurrentCh);
+    TXBuf[((2*CurrentCh) + HEADERLEN)] = ((unsigned char)((ADC_Value & 0xFF00) >> 8));	// Write High Byte
+    TXBuf[((2*CurrentCh) + HEADERLEN + 1)] = ((unsigned char)(ADC_Value & 0x00FF));	// Write Low Byte
+  }
+	 
+  // Send Packet
+  for(TXIndex=0;TXIndex<17;TXIndex++){
+    Serial.write(TXBuf[TXIndex]);
+  }
+  
+  // Increment the packet counter
+  TXBuf[3]++;			
+  
+  // Generate the CAL_SIGnal
+  counter++;		// increment the devider counter
+  if(counter == 12){	// 250/12/2 = 10.4Hz ->Toggle frequency
+    counter = 0;
+    toggle_GAL_SIG();	// Generate CAL signal with frequ ~10Hz
+  }
+}
+
+/****************************************************/
+/*  Function name: setup                            */
+/*  Parameters                                      */
+/*    Input   :  No	                                */
 /*    Output  :  No                                 */
 /*    Action: Initializes all peripherals           */
 /****************************************************/
@@ -149,42 +184,6 @@ void setup() {
  
  interrupts();  // Enable all interrupts after initialization has been completed
 }
-
-/****************************************************/
-/*  Function name: Timer2_Overflow_ISR              */
-/*  Parameters                                      */
-/*    Input   :  No	                            */
-/*    Output  :  No                                 */
-/*    Action: Determines ADC sampling frequency.    */
-/****************************************************/
-void Timer2_Overflow_ISR()
-{
-  // Toggle LED1 with ADC sampling frequency /2
-  Toggle_LED1();
-  
-  //Read the 6 ADC inputs and store current values in Packet
-  for(CurrentCh=0;CurrentCh<6;CurrentCh++){
-    ADC_Value = analogRead(CurrentCh);
-    TXBuf[((2*CurrentCh) + HEADERLEN)] = ((unsigned char)((ADC_Value & 0xFF00) >> 8));	// Write High Byte
-    TXBuf[((2*CurrentCh) + HEADERLEN + 1)] = ((unsigned char)(ADC_Value & 0x00FF));	// Write Low Byte
-  }
-	 
-  // Send Packet
-  for(TXIndex=0;TXIndex<17;TXIndex++){
-    Serial.write(TXBuf[TXIndex]);
-  }
-  
-  // Increment the packet counter
-  TXBuf[3]++;			
-  
-  // Generate the CAL_SIGnal
-  counter++;		// increment the devider counter
-  if(counter == 12){	// 250/12/2 = 10.4Hz ->Toggle frequency
-    counter = 0;
-    toggle_GAL_SIG();	// Generate CAL signal with frequ ~10Hz
-  }
-}
-
 
 /****************************************************/
 /*  Function name: loop                             */
