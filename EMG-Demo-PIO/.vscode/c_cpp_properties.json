@@ -1,0 +1,60 @@
+//
+// !!! WARNING !!! AUTO-GENERATED FILE!
+// PLEASE DO NOT MODIFY IT AND USE "platformio.ini":
+// https://docs.platformio.org/page/projectconf/section_env_build.html#build-flags
+//
+{
+    "configurations": [
+        {
+            "name": "PlatformIO",
+            "includePath": [
+                "D:/Users/Jan-S/OneDrive - studmail.w-hs.de/Semester 5/ISYS/ISYS_Hardware/include",
+                "D:/Users/Jan-S/OneDrive - studmail.w-hs.de/Semester 5/ISYS/ISYS_Hardware/src",
+                "D:/Users/Jan-S/OneDrive - studmail.w-hs.de/Semester 5/ISYS/ISYS_Hardware/.pio/libdeps/uno_janLaptop/FlexiTimer2",
+                "C:/Users/Jan-S/.platformio/packages/framework-arduino-avr/cores/arduino",
+                "C:/Users/Jan-S/.platformio/packages/framework-arduino-avr/variants/standard",
+                "C:/Users/Jan-S/.platformio/packages/framework-arduino-avr/libraries/EEPROM/src",
+                "C:/Users/Jan-S/.platformio/packages/framework-arduino-avr/libraries/HID/src",
+                "C:/Users/Jan-S/.platformio/packages/framework-arduino-avr/libraries/SPI/src",
+                "C:/Users/Jan-S/.platformio/packages/framework-arduino-avr/libraries/SoftwareSerial/src",
+                "C:/Users/Jan-S/.platformio/packages/framework-arduino-avr/libraries/Wire/src",
+                "C:/Users/Jan-S/.platformio/packages/tool-unity",
+                ""
+            ],
+            "browse": {
+                "limitSymbolsToIncludedHeaders": true,
+                "path": [
+                    "D:/Users/Jan-S/OneDrive - studmail.w-hs.de/Semester 5/ISYS/ISYS_Hardware/include",
+                    "D:/Users/Jan-S/OneDrive - studmail.w-hs.de/Semester 5/ISYS/ISYS_Hardware/src",
+                    "D:/Users/Jan-S/OneDrive - studmail.w-hs.de/Semester 5/ISYS/ISYS_Hardware/.pio/libdeps/uno_janLaptop/FlexiTimer2",
+                    "C:/Users/Jan-S/.platformio/packages/framework-arduino-avr/cores/arduino",
+                    "C:/Users/Jan-S/.platformio/packages/framework-arduino-avr/variants/standard",
+                    "C:/Users/Jan-S/.platformio/packages/framework-arduino-avr/libraries/EEPROM/src",
+                    "C:/Users/Jan-S/.platformio/packages/framework-arduino-avr/libraries/HID/src",
+                    "C:/Users/Jan-S/.platformio/packages/framework-arduino-avr/libraries/SPI/src",
+                    "C:/Users/Jan-S/.platformio/packages/framework-arduino-avr/libraries/SoftwareSerial/src",
+                    "C:/Users/Jan-S/.platformio/packages/framework-arduino-avr/libraries/Wire/src",
+                    "C:/Users/Jan-S/.platformio/packages/tool-unity",
+                    ""
+                ]
+            },
+            "defines": [
+                "PLATFORMIO=50202",
+                "ARDUINO_AVR_UNO",
+                "F_CPU=16000000L",
+                "ARDUINO_ARCH_AVR",
+                "ARDUINO=10808",
+                "__AVR_ATmega328P__",
+                ""
+            ],
+            "cStandard": "c11",
+            "cppStandard": "c++11",
+            "compilerPath": "C:/Users/Jan-S/.platformio/packages/toolchain-atmelavr/bin/avr-gcc.exe",
+            "compilerArgs": [
+                "-mmcu=atmega328p",
+                ""
+            ]
+        }
+    ],
+    "version": 4
+}
