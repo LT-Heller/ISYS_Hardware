@@ -2,6 +2,11 @@ from tkinter.constants import END, LEFT, RIGHT, Y
 import serial
 import sys 
 import tkinter as tk
+import matplotlib
+matplotlib.use("TkAgg")
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2Tk
+from matplotlib.figure import Figure
+from functions.plotwindow import Plotwindow
 
 def serial_ports():
     """ Lists serial port names
@@ -32,12 +37,18 @@ def serial_ports():
     return result
 
 def loop():
+    global plotTime
+    line = str()
     try:
-        line = ser.readline()
+        line = str(ser.readline())
     except (OSError, serial.SerialException):
         return
+    value = line.split("\t")
+    if value[0]:
+        pw.addplotxy(plotTime,value[0])
+    plotTime += 0.04
     serMon.insert(END, line)
-    app.after(4, loop)
+    app.after(4, loop)                  #default 4ms
 
 ser = serial.Serial()
 ser.timeout = 0.4
@@ -48,7 +59,7 @@ app = tk.Tk()
 # Den Fenstertitle erstellen
 app.title("EMG Recorder")
 
-app.geometry('200x300')
+app.geometry('1000x500')
 
 portList = list(serial_ports())
 if not portList:
@@ -63,10 +74,15 @@ opt.pack()
 
 serScroll = tk.Scrollbar(app)
 serMon = tk.Text(app, height=10, width=50)
-serScroll.pack(side=RIGHT, fill=Y)
 serMon.pack(side=LEFT, fill=Y)
+serScroll.pack(side=LEFT, fill=Y)
 serScroll.config(command=serMon.yview)
 serMon.config(yscrollcommand=serScroll.set)
+
+mf = tk.Frame(master = app)
+pw = Plotwindow(mf,(200,150))
+mf.pack()
+plotTime = 0
 
 app.after(0, loop)
 app.mainloop()
