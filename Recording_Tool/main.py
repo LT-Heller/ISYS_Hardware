@@ -36,18 +36,26 @@ def serial_ports():
             pass
     return result
 
+def chosePortAction():
+    try:
+        ser.port = selectedPort.get()
+        ser.open()
+    except:
+        pass
+
 def loop():
     global plotTime
     line = str()
     try:
         line = str(ser.readline())
     except (OSError, serial.SerialException):
+        app.after(4, loop)
         return
     value = line.split("\t")
     if value[0]:
         pw.addplotxy(plotTime,value[0])
     plotTime += 0.04
-    serMon.insert(END, line)
+    serMon.insert(END, line + "\n")
     app.after(4, loop)                  #default 4ms
 
 ser = serial.Serial()
@@ -72,6 +80,9 @@ opt = tk.OptionMenu(app, selectedPort, *portList)
 opt.config(width=90, font=('Helvetica', 12))
 opt.pack()
 
+chosePort = tk.Button(app, text="Port wählen", command=chosePortAction)
+chosePort.pack(side=RIGHT)
+
 serScroll = tk.Scrollbar(app)
 serMon = tk.Text(app, height=10, width=50)
 serMon.pack(side=LEFT, fill=Y)
@@ -83,6 +94,6 @@ mf = tk.Frame(master = app)
 pw = Plotwindow(mf,(200,150))
 mf.pack()
 plotTime = 0
-
+    
 app.after(0, loop)
 app.mainloop()
