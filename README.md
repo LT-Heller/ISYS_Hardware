@@ -3,12 +3,12 @@
 Aufnahme von elektrischen Signalen von Muskeln, um mithilfe eines neuronalen Netzes Handzeichen zu erkennnen.
 
 ## To Do:
-[x] ASCII Ausgabe von Messweten vom Arduino
-[ ] Ausgabe auf 4 ADCs begrenzen (spart Serielle Bandbreite)
-[ ] Serieller Monitor
-[ ] Logdatei erstellen
-[ ] Serieller Plotter
-[ ] Bildausgabe für Handbewegung (Stein, Schere, Papier)
+- [x] ASCII Ausgabe von Messweten vom Arduino
+- [ ] Ausgabe auf 4 ADCs begrenzen (spart Serielle Bandbreite)
+- [ ] Serieller Monitor
+- [ ] Logdatei erstellen
+- [ ] Serieller Plotter
+- [ ] Bildausgabe für Handbewegung (Stein, Schere, Papier)
 
 
 ## Zeitplan:
