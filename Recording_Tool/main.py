@@ -2,10 +2,10 @@ from tkinter.constants import END, LEFT, RIGHT, Y
 import serial
 import sys 
 import tkinter as tk
-import matplotlib
-matplotlib.use("TkAgg")
-from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2Tk
-from matplotlib.figure import Figure
+#import matplotlib
+#matplotlib.use("TkAgg")
+#from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2Tk
+#from matplotlib.figure import Figure
 from functions.plotwindow import Plotwindow
 
 def serial_ports():
