@@ -4,7 +4,7 @@ Aufnahme von elektrischen Signalen von Muskeln, um mithilfe eines neuronalen Net
 
 ## To Do:
 - [x] ASCII Ausgabe von Messweten vom Arduino
-- [ ] Ausgabe auf 4 ADCs begrenzen (spart Serielle Bandbreite)
+- [x] Ausgabe auf 4 ADCs begrenzen (spart Serielle Bandbreite)
 - [ ] Serieller Monitor
 - [ ] Logdatei erstellen
 - [ ] Serieller Plotter
