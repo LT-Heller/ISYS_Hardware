@@ -27,6 +27,9 @@ Aufnahme von elektrischen Signalen von Muskeln, um mithilfe eines neuronalen Net
 - Ende Dezember    (30.12.2021):
   - [ ]  Daten auswerten
   - [ ]  evtl. Programm zum Spielen(Schere,Stein,Papier)erstellen
-- Mitte Januar     (13.12.2021):
-  - [ ]  Ausarbeitung erstellen
+- Mitte Januar     (13.01.2021):
+  - [ ]  Ausarbeitung fertigstellen
   - [ ]  Präsentation erstellen
+
+Hier ist Luca!
+:)
