@@ -30,3 +30,5 @@ Aufnahme von elektrischen Signalen von Muskeln, um mithilfe eines neuronalen Net
 - Mitte Januar     (13.01.2021):
   - [ ]  Ausarbeitung fertigstellen
   - [ ]  Präsentation erstellen
+
+Hier ist Luca!
