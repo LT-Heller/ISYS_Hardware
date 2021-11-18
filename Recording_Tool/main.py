@@ -7,6 +7,8 @@ import tkinter as tk
 #from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2Tk
 #from matplotlib.figure import Figure
 from functions.plotwindow import Plotwindow
+import time
+from functions.serialReciever import serialReciever
 
 def serial_ports():
     """ Lists serial port names
@@ -40,27 +42,61 @@ def chosePortAction():
     try:
         ser.port = selectedPort.get()
         ser.open()
+        time.sleep(1)
     except:
         pass
 
 def loop():
     global plotTime
     line = str()
+    string = str()
+    value = [0]
     try:
-        line = str(ser.readline())
+        line = ser.readline()
     except (OSError, serial.SerialException):
         app.after(4, loop)
         return
-    value = line.split("\t")
+    try:
+        value = str(line, 'ascii').split("\t")
+        string = str(line, 'ascii')
+    except:
+        pass
     if value[0]:
-        pw.addplotxy(plotTime,value[0])
+        pw.addplotxy(round(time.time()*1000),int(value[0]))
     plotTime += 0.04
-    serMon.insert(END, line + "\n")
-    app.after(4, loop)                  #default 4ms
+    serMon.insert(END, string)
+    serMon.yview_moveto(1)
+    app.after(1, loop)                  #default 4ms
+    
+def plot():
+    data = list(sr.getSerialData())
+    times = []
+    values = []
+    string = str()
+    for dat in data:
+        try:
+            times.append(dat['time'])#times.append(round(dat['time'] * 1000))
+            values.append(int(dat['value'][0]))
+            string += str(dat) + '\n'
+        except:
+            pass
+    serMon.insert(END, string)
+    serMon.yview_moveto(1)
+    pw.plotxy(times, values)
+    app.after(1000, plot)
+        
+#sr = serialReciever()
+#while True:
+#    sr.readSerialStart()
+#    data = list(sr.getSerialData())
+#    for dat in data:
+#        print (dat)
+#        print('\n')
+#    time.sleep(1)
 
-ser = serial.Serial()
-ser.timeout = 0.4
-ser.baudrate = 57600
+#ser = serial.Serial()
+#ser.timeout = 0.4
+#ser.baudrate = 115200
 
 # Ein Fenster erstellen
 app = tk.Tk()
@@ -94,6 +130,11 @@ mf = tk.Frame(master = app)
 pw = Plotwindow(mf,(200,150))
 mf.pack()
 plotTime = 0
+
+sr = serialReciever()
+sr.readSerialStart()
     
-app.after(0, loop)
+#app.after(0, loop)
+app.after(10, plot)
 app.mainloop()
+sr.close()

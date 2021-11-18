@@ -52,7 +52,7 @@ struct Olimexino328_packet
 #define NUMCHANNELS 6
 #define HEADERLEN 4
 #define PACKETLEN (NUMCHANNELS * 2 + HEADERLEN + 1)
-#define SAMPFREQ 256                      // ADC sampling rate 256
+#define SAMPFREQ 512                      // ADC sampling rate 256
 #define TIMER2VAL (1024/(SAMPFREQ))       // Set 256Hz sampling frequency                    
 #define LED1  13
 #define CAL_SIG 9
@@ -181,7 +181,7 @@ void setup() {
  FlexiTimer2::start();
  
  // Serial Port
- Serial.begin(57600);
+ Serial.begin(115200);
  //Set speed to 57600 bps
  
  // MCU sleep mode = idle.
