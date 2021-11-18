@@ -4,3 +4,4 @@
 .vscode/launch.json
 .vscode/ipch
 Recording_Tool/functions/__pycache__
+.vscode
