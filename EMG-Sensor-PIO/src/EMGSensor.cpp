@@ -49,11 +49,11 @@ struct Olimexino328_packet
 //http://www.arduino.cc/playground/Main/FlexiTimer2
 
 // All definitions
-#define NUMCHANNELS 6
+#define BAUDRATE 115200
+#define NUMCHANNELS 4
 #define HEADERLEN 4
 #define PACKETLEN (NUMCHANNELS * 2 + HEADERLEN + 1)
-#define SAMPFREQ 512                      // ADC sampling rate 256
-#define TIMER2VAL (1024/(SAMPFREQ))       // Set 256Hz sampling frequency                    
+#define SAMPFREQ 1000                      // ADC sampling rate 256                   
 #define LED1  13
 #define CAL_SIG 9
 
@@ -85,19 +85,18 @@ void Toggle_LED1(void){
 
 
 /****************************************************/
-/*  Function name: toggle_GAL_SIG                   */
+/*  Function name: toggle_CAL_SIG                   */
 /*  Parameters                                      */
 /*    Input   :  No	                            */
 /*    Output  :  No                                 */
-/*    Action: Switches-over GAL_SIG.                */
+/*    Action: Switches-over CAL_SIG.                */
 /****************************************************/
-void toggle_GAL_SIG(void){
+void toggle_CAL_SIG(void){
   
  if(digitalRead(CAL_SIG) == HIGH){ digitalWrite(CAL_SIG, LOW); }
  else{ digitalWrite(CAL_SIG, HIGH); }
  
 }
-
 
 /****************************************************/
 /*  Function name: Timer2_Overflow_ISR              */
@@ -112,13 +111,13 @@ void Timer2_Overflow_ISR()
   Toggle_LED1();
   
   //Read the 6 ADC inputs and store current values in Packet
-  for(CurrentCh=0;CurrentCh<6;CurrentCh++){
+  for(CurrentCh=0; CurrentCh<NUMCHANNELS; CurrentCh++){
     ADC_Value = analogRead(CurrentCh);
     ChannelValue[CurrentCh] = ADC_Value;
   }
 	 
   // Send Packet
-  for(int Channel=0;Channel<6;Channel++){
+  for(int Channel=0; Channel<NUMCHANNELS; Channel++){
     Serial.write(ChannelValue[Channel] / 1000 + '0');
     Serial.write(ChannelValue[Channel] % 1000 / 100 + '0');
     Serial.write(ChannelValue[Channel] % 100 / 10 + '0');
@@ -134,7 +133,7 @@ void Timer2_Overflow_ISR()
   counter++;		// increment the devider counter
   if(counter == 12){	// 250/12/2 = 10.4Hz ->Toggle frequency
     counter = 0;
-    toggle_GAL_SIG();	// Generate CAL signal with frequ ~10Hz
+    toggle_CAL_SIG();	// Generate CAL signal with frequ ~10Hz
   }
 }
 
@@ -177,12 +176,11 @@ void setup() {
  // Timer2 is used to setup the analag channels sampling frequency and packet update.
  // Whenever interrupt occures, the current read packet is sent to the PC
  // In addition the CAL_SIG is generated as well, so Timer1 is not required in this case!
- FlexiTimer2::set(TIMER2VAL, Timer2_Overflow_ISR);
+ FlexiTimer2::set(1, 1/SAMPFREQ, Timer2_Overflow_ISR);
  FlexiTimer2::start();
  
  // Serial Port
- Serial.begin(115200);
- //Set speed to 57600 bps
+ Serial.begin(BAUDRATE);
  
  // MCU sleep mode = idle.
  //outb(MCUCR,(inp(MCUCR) | (1<<SE)) & (~(1<<SM0) | ~(1<<SM1) | ~(1<<SM2)));

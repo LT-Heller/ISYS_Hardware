@@ -12,31 +12,31 @@
             "type": "platformio-debug",
             "request": "launch",
             "name": "PIO Debug",
-            "executable": "D:/Users/Jan-S/OneDrive - studmail.w-hs.de/Semester 5/ISYS/ISYS_Hardware/EMG-Demo-PIO/.pio/build/uno_janLaptop/firmware.elf",
-            "projectEnvName": "uno_janLaptop",
-            "toolchainBinDir": "C:/Users/Jan-S/.platformio/packages/toolchain-atmelavr/bin",
+            "executable": "C:/Users/FishL/Desktop/ISYS_Hardware/EMG-Demo-PIO/.pio/build/uno/firmware.elf",
+            "projectEnvName": "uno",
+            "toolchainBinDir": "C:/Users/FishL/.platformio/packages/toolchain-atmelavr/bin",
             "internalConsoleOptions": "openOnSessionStart",
             "preLaunchTask": {
                 "type": "PlatformIO",
-                "task": "Pre-Debug (uno_janLaptop)"
+                "task": "Pre-Debug (uno)"
             }
         },
         {
             "type": "platformio-debug",
             "request": "launch",
             "name": "PIO Debug (skip Pre-Debug)",
-            "executable": "D:/Users/Jan-S/OneDrive - studmail.w-hs.de/Semester 5/ISYS/ISYS_Hardware/EMG-Demo-PIO/.pio/build/uno_janLaptop/firmware.elf",
-            "projectEnvName": "uno_janLaptop",
-            "toolchainBinDir": "C:/Users/Jan-S/.platformio/packages/toolchain-atmelavr/bin",
+            "executable": "C:/Users/FishL/Desktop/ISYS_Hardware/EMG-Demo-PIO/.pio/build/uno/firmware.elf",
+            "projectEnvName": "uno",
+            "toolchainBinDir": "C:/Users/FishL/.platformio/packages/toolchain-atmelavr/bin",
             "internalConsoleOptions": "openOnSessionStart"
         },
         {
             "type": "platformio-debug",
             "request": "launch",
             "name": "PIO Debug (without uploading)",
-            "executable": "D:/Users/Jan-S/OneDrive - studmail.w-hs.de/Semester 5/ISYS/ISYS_Hardware/EMG-Demo-PIO/.pio/build/uno_janLaptop/firmware.elf",
-            "projectEnvName": "uno_janLaptop",
-            "toolchainBinDir": "C:/Users/Jan-S/.platformio/packages/toolchain-atmelavr/bin",
+            "executable": "C:/Users/FishL/Desktop/ISYS_Hardware/EMG-Demo-PIO/.pio/build/uno/firmware.elf",
+            "projectEnvName": "uno",
+            "toolchainBinDir": "C:/Users/FishL/.platformio/packages/toolchain-atmelavr/bin",
             "internalConsoleOptions": "openOnSessionStart",
             "loadMode": "manual"
         }
