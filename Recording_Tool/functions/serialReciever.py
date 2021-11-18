@@ -23,6 +23,7 @@ class serialReciever:
         self.logTimer = 0
         self.previousTimer = 0
         self.initTime = time.time()
+        self.line = bytes()
         # self.csvData = []
 
         print('Trying to connect to: ' + str(serialPort) + ' at ' + str(serialBaud) + ' BAUD.')
@@ -31,6 +32,9 @@ class serialReciever:
             print('Connected to ' + str(serialPort) + ' at ' + str(serialBaud) + ' BAUD.')
         except:
             print("Failed to connect with " + str(serialPort) + ' at ' + str(serialBaud) + ' BAUD.')
+            
+    def changePort(self, port):
+        self.port = port
 
     def readSerialStart(self):
         if self.thread == None:
@@ -49,9 +53,9 @@ class serialReciever:
         oldtime = self.initTime
         while (self.isRun):
             #time.sleep(0.001)
-            line = self.serialConnection.readline()
+            self.line = self.serialConnection.readline()
             try:
-                value = str(line, 'ascii').split("\t")
+                value = str(self.line, 'ascii').split("\t")
             #    print(value[0])
             except:
                 pass

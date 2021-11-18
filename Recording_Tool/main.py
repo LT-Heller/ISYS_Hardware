@@ -1,4 +1,4 @@
-from tkinter.constants import END, LEFT, RIGHT, Y
+from tkinter.constants import END, FALSE, LEFT, RIGHT, Y
 import serial
 import sys 
 import tkinter as tk
@@ -9,6 +9,9 @@ import tkinter as tk
 from functions.plotwindow import Plotwindow
 import time
 from functions.serialReciever import serialReciever
+import threading
+
+RUN = True
 
 def serial_ports():
     """ Lists serial port names
@@ -40,9 +43,12 @@ def serial_ports():
 
 def chosePortAction():
     try:
-        ser.port = selectedPort.get()
-        ser.open()
-        time.sleep(1)
+        port = selectedPort.get()
+        if port != 'None':
+            sr.changePort(port)
+            sr.readSerialStart()
+            time.sleep(1)
+            thread.start()
     except:
         pass
 
@@ -84,6 +90,16 @@ def plot():
     serMon.yview_moveto(1)
     pw.plotxy(times, values)
     app.after(1000, plot)
+    
+def refreshSerMon():
+    global RUN
+    while(RUN):
+        try:
+            line = str(sr.line, 'ascii')
+        except:
+            pass
+        serMon.insert(END, line)
+        serMon.yview_moveto(1)
         
 #sr = serialReciever()
 #while True:
@@ -132,9 +148,14 @@ mf.pack()
 plotTime = 0
 
 sr = serialReciever()
-sr.readSerialStart()
     
 #app.after(0, loop)
-app.after(10, plot)
+#app.after(10, plot)
+
+thread = threading.Thread(target = refreshSerMon)
+
 app.mainloop()
+
+RUN=False
 sr.close()
+thread.join()
