@@ -31,5 +31,5 @@ Aufnahme von elektrischen Signalen von Muskeln, um mithilfe eines neuronalen Net
   - [ ]  Ausarbeitung fertigstellen
   - [ ]  Präsentation erstellen
 
-
+Hier ist Luca!
 :)
