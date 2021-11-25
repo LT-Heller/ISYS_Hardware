@@ -5,9 +5,9 @@ Aufnahme von elektrischen Signalen von Muskeln, um mithilfe eines neuronalen Net
 ## To Do:
 - [x] ASCII Ausgabe von Messweten vom Arduino
 - [x] Ausgabe auf 4 ADCs begrenzen (spart Serielle Bandbreite)
-- [ ] Serieller Monitor
+- [x] Serieller Monitor
 - [ ] Logdatei erstellen
-- [ ] Serieller Plotter
+- [x] Serieller Plotter
 - [ ] Bildausgabe für Handbewegung (Stein, Schere, Papier)
 
 
@@ -31,5 +31,5 @@ Aufnahme von elektrischen Signalen von Muskeln, um mithilfe eines neuronalen Net
   - [ ]  Ausarbeitung fertigstellen
   - [ ]  Präsentation erstellen
 
-Hier ist Luca!
-:)
+
+Danke an Michał "mich-w" Waliszkiewicz für seinen Seriellen Monitor: https://github.com/mich-w/QtSerialMonitor
