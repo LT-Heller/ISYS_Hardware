@@ -121,11 +121,11 @@ void Timer2_Overflow_ISR()
 	 
   // Send Packet
   for(int Channel=0; Channel<NUMCHANNELS; Channel++){
-    // Serial.write(ChannelValue[Channel] / 1000 + '0');
-    // Serial.write(ChannelValue[Channel] % 1000 / 100 + '0');
-    // Serial.write(ChannelValue[Channel] % 100 / 10 + '0');
-    // Serial.write(ChannelValue[Channel] % 10 + '0');
-    Serial.print(ChannelValue[Channel]);
+    Serial.write(ChannelValue[Channel] / 1000 + '0');
+    Serial.write(ChannelValue[Channel] % 1000 / 100 + '0');
+    Serial.write(ChannelValue[Channel] % 100 / 10 + '0');
+    Serial.write(ChannelValue[Channel] % 10 + '0');
+    // Serial.print(ChannelValue[Channel]);
     Serial.write('\t');
   }
   Serial.write('\n');
