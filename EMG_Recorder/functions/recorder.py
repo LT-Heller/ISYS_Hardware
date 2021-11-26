@@ -4,8 +4,8 @@ import os
 class recorder:
     def __init__(self):
         self.values = [[] for _ in range(4)]
-        self.currentPath = os.getcwd()
-        self.path = self.currentPath + "{}data".format(os.sep)
+        self.currentPath = os.path.dirname(os.path.abspath(__file__))
+        self.path = self.currentPath + "{0}..{0}data".format(os.sep)
         self.recorderIsRunning = False
         self.recording = False
         self.startTime = time.time()

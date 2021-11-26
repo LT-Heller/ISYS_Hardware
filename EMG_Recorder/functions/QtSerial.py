@@ -23,6 +23,7 @@ class serialTools:
         self.queue = Queue()
         self.counter = 0
         self.QtMainWindow = QTMainWindow
+        self.dataType = "STRING"                                  #STRING or BYTE
         
     def __del__(self):
         pass
@@ -73,14 +74,22 @@ class serialTools:
     
     def receive(self):
         while self.serial.canReadLine():
-            text = self.serial.readLine().data().decode()
-            text = text.rstrip('\r\n')
+            if self.dataType == "BYTE":
+                by = self.serial.readLine()
+                byy = by.split('\t')
+            else:
+                text = self.serial.readLine().data().decode()
+                text = text.rstrip('\r\n')
             try:
-                values = text.split("\t")
-                values.pop(0)
+                if self.dataType == "BYTE":
+                    values = [0,0,0,0]
+                    for i in range(0,3):
+                        values[i] = int.from_bytes(byy[i],byteorder='big')
+                else:
+                    values = text.split("\t")
             except:
                 pass
             dat = {'values':values,'time':time.time() - self.initTime}
-            #return(dat['time'], dat['values'])
+            #return(dat['time'], dat['values']))
             if len(values) > 3:
                 self.queue.put(dat)

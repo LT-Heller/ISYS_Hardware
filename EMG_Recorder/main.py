@@ -14,7 +14,8 @@ class MainWindow(QtWidgets.QMainWindow):
         super(MainWindow, self).__init__(*args, **kwargs)
 
         #Load the UI Page
-        uic.loadUi('./ui/main.ui', self)
+        self.currentPath = os.path.dirname(os.path.abspath(__file__))
+        uic.loadUi(self.currentPath + '/ui/main.ui', self)
         
         self.st = serialTools(self)
         self.serialPorts = self.st.serial_ports()
@@ -31,7 +32,6 @@ class MainWindow(QtWidgets.QMainWindow):
         self.timer = QtCore.QTimer()
         self.timer.setInterval(10)
         self.timer.timeout.connect(self.getSerialData)
-        self.currentPath = os.getcwd()
         self.setPicture()
         
     def __del__(self):
