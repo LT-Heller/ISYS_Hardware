@@ -5,3 +5,5 @@
 .vscode/ipch
 Recording_Tool/functions/__pycache__
 .vscode
+*__pycache__*
+EMG_Recorder/output/main/
