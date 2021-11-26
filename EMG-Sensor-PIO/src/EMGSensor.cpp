@@ -49,7 +49,7 @@ struct Olimexino328_packet
 //http://www.arduino.cc/playground/Main/FlexiTimer2
 
 // All definitions
-#define BAUDRATE 115200
+#define BAUDRATE 2000000
 #define NUMCHANNELS 4
 #define HEADERLEN 4
 #define PACKETLEN (NUMCHANNELS * 2 + HEADERLEN + 1)
