@@ -48,7 +48,8 @@ def chosePortAction():
             sr.changePort(port)
             sr.readSerialStart()
             time.sleep(1)
-            thread.start()
+            threadSerMon.start()
+            #threadPlot.start()
     except:
         pass
 
@@ -75,31 +76,35 @@ def loop():
     app.after(1, loop)                  #default 4ms
     
 def plot():
-    data = list(sr.getSerialData())
-    times = []
-    values = []
-    string = str()
-    for dat in data:
-        try:
-            times.append(dat['time'])#times.append(round(dat['time'] * 1000))
-            values.append(int(dat['value'][0]))
-            string += str(dat) + '\n'
-        except:
-            pass
-    serMon.insert(END, string)
-    serMon.yview_moveto(1)
-    pw.plotxy(times, values)
-    app.after(1000, plot)
+    while(RUN):
+        data = list(sr.getSerialData())
+        times = []
+        values = []
+        for dat in data:
+            try:
+                times.append(dat['time'])#times.append(round(dat['time'] * 1000))
+                values.append(int(dat['value'][0]))
+            except:
+                pass
+        pw.plotxy(times, values)
     
 def refreshSerMon():
     global RUN
+    oldLine = str()
+    oldFlag = True
     while(RUN):
         try:
             line = str(sr.line, 'ascii')
         except:
             pass
+        f.write("Werte", line)
         serMon.insert(END, line)
         serMon.yview_moveto(1)
+        
+def writeFile():
+    f = open("test.txt","w")
+    f.write(str(sr.line, 'ascii'))
+    f.close
         
 #sr = serialReciever()
 #while True:
@@ -148,14 +153,23 @@ mf.pack()
 plotTime = 0
 
 sr = serialReciever()
+try:
+    f = open("test.txt","a")
+except:
+    f = open("test.txt","w")
+    print("Datei wurde erstellt")
     
 #app.after(0, loop)
 #app.after(10, plot)
 
-thread = threading.Thread(target = refreshSerMon)
+threadSerMon = threading.Thread(target = refreshSerMon)
+threadPlot = threading.Thread(target = plot)
+threadWriteFile = threading.Thread(target = writeFile)
 
 app.mainloop()
 
 RUN=False
 sr.close()
-thread.join()
+f.close
+threadPlot.join()
+threadSerMon.join()
