@@ -43,6 +43,9 @@ struct Olimexino328_packet
 };
 */
 /**********************************************************/
+#define LITE
+#ifndef LITE
+
 #include <Arduino.h>
 #include <compat/deprecated.h>
 #include <FlexiTimer2.h>
@@ -118,10 +121,11 @@ void Timer2_Overflow_ISR()
 	 
   // Send Packet
   for(int Channel=0; Channel<NUMCHANNELS; Channel++){
-    Serial.write(ChannelValue[Channel] / 1000 + '0');
-    Serial.write(ChannelValue[Channel] % 1000 / 100 + '0');
-    Serial.write(ChannelValue[Channel] % 100 / 10 + '0');
-    Serial.write(ChannelValue[Channel] % 10 + '0');
+    // Serial.write(ChannelValue[Channel] / 1000 + '0');
+    // Serial.write(ChannelValue[Channel] % 1000 / 100 + '0');
+    // Serial.write(ChannelValue[Channel] % 100 / 10 + '0');
+    // Serial.write(ChannelValue[Channel] % 10 + '0');
+    Serial.print(ChannelValue[Channel]);
     Serial.write('\t');
   }
   Serial.write('\n');
@@ -200,3 +204,4 @@ void loop() {
  __asm__ __volatile__ ("sleep");
  
 }
+#endif
