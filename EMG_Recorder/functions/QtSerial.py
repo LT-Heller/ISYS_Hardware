@@ -5,6 +5,8 @@ import collections
 import threading
 from queue import Queue
 from PyQt5 import QtSerialPort, QtCore
+import struct
+import glob
 
 class serialTools:
     
@@ -23,7 +25,7 @@ class serialTools:
         self.queue = Queue()
         self.counter = 0
         self.QtMainWindow = QTMainWindow
-        self.dataType = "STRING"                                  #STRING or BYTE
+        self.dataType = "BYTE"                                  #STRING or BYTE
         
     def __del__(self):
         pass
@@ -76,15 +78,17 @@ class serialTools:
         while self.serial.canReadLine():
             if self.dataType == "BYTE":
                 by = self.serial.readLine()
-                byy = by.split('\t')
+                by = by[:8]
+                #byy = by.split('\t')
             else:
                 text = self.serial.readLine().data().decode()
                 text = text.rstrip('\r\n')
             try:
                 if self.dataType == "BYTE":
-                    values = [0,0,0,0]
-                    for i in range(0,3):
-                        values[i] = int.from_bytes(byy[i],byteorder='big')
+                    values = (0,0,0,0)
+                    #for i in range(0,3):
+                        #values[i] = int.from_bytes(byy[i],byteorder='big')
+                    values = struct.unpack('>HHHH', by)
                 else:
                     values = text.split("\t")
             except:

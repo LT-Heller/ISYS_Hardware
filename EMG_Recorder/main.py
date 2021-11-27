@@ -30,7 +30,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.record = recorder()
         self.graph = graphPlot(self)
         self.timer = QtCore.QTimer()
-        self.timer.setInterval(10)
+        self.timer.setInterval(20)
         self.timer.timeout.connect(self.getSerialData)
         self.setPicture()
         

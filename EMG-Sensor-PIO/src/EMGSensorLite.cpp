@@ -11,7 +11,8 @@ void setup(){
 }
 
 void loop(){
-    if(true){
+    unsigned int ADC_Value = 0;
+    if(false){
         Serial.print(analogRead(A0));
         Serial.print('\t');
         Serial.print(analogRead(A1));
@@ -22,15 +23,19 @@ void loop(){
         Serial.print('\n');
     }
     else{
-        Serial.write(analogRead(A0));
-        Serial.write('\t');
-        Serial.write(analogRead(A1));
-        Serial.write('\t');
-        Serial.write(analogRead(A2));
-        Serial.write('\t');
-        Serial.write(analogRead(A3));
+        for(unsigned char CurrentCh=0;CurrentCh<4;CurrentCh++){
+        ADC_Value = analogRead(CurrentCh);
+        Serial.write((unsigned char)((ADC_Value & 0xFF00) >> 8));
+        Serial.write((unsigned char)(ADC_Value & 0x00FF));
+        }
+        //Serial.write('\t');
+        //Serial.write(analogRead(A1));
+        //Serial.write('\t');
+        //Serial.write(analogRead(A2));
+        //Serial.write('\t');
+        //Serial.write(analogRead(A3));
         Serial.write('\n');
     }
-    delay(4);
+    delay(2);
 }
 #endif
