@@ -107,6 +107,11 @@
       </item>
       <item>
        <widget class="QLabel" name="labelInfotext">
+        <property name="font">
+         <font>
+          <pointsize>23</pointsize>
+         </font>
+        </property>
         <property name="text">
          <string>Recorder Infotext</string>
         </property>

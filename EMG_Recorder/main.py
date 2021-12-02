@@ -69,26 +69,33 @@ class MainWindow(QtWidgets.QMainWindow):
         self.record.stopRecorder()
         #self.recordThread.join()
         
-    def getSerialData(self):
+    def getSerialData(self):    #liste raus machen
+        times = []
+        value = [[],[],[],[]]
         while not self.st.queue.empty():
             data = self.st.queue.get()
             time = data['time']
             values = data['values']
             try:
                 if(int(values[0]) > 1024 or int(values[1]) > 1024 or int(values[2]) > 1024 or int(values[3]) > 1024):
-                    return
+                    continue
                 if(int(values[0]) < 0 or int(values[1]) < 0 or int(values[2]) < 0 or int(values[3]) < 0):
-                    return
+                    continue
             except:
-                return
+                continue
+            times.append(data['time'])
+            value[0].append(int(values[0]))
+            value[1].append(int(values[1]))
+            value[2].append(int(values[2]))
+            value[3].append(int(values[3]))
             try:
-                self.textBrowserSerial.append("{:.3f}:\t{}  {}  {}  {}".format(time,values[0],values[1],values[2],values[3]))
-                self.graph.addAndPlot(time,int(values[0]),int(values[1]),int(values[2]),int(values[3]))
+                self.textBrowserSerial.setText("{:.3f}:\t{}  {}  {}  {}".format(time,values[0],values[1],values[2],values[3]))
                 self.record.addData(int(values[0]),int(values[1]),int(values[2]),int(values[3]))
                 self.labelInfotext.setText(self.record.getInfoText())
                 self.setPicture()
             except:
                 pass
+        self.graph.addAndPlot(times,(value[0]),(value[1]),(value[2]),(value[3]))
         
     def plot(self, time, value):
         self.graph.addAndPlot(time, value, value, value, value)

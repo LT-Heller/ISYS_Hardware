@@ -30,18 +30,31 @@ class graphPlot:
         self.data_line4.setData(self.time, self.values[3], pen=self.pen4, name="Channel 4")
         
     def addAndPlot(self, time, value1, value2, value3, value4):
-        self.time.append(time)
-        self.values[0].append(value1)
-        self.values[1].append(value2)
-        self.values[2].append(value3)
-        self.values[3].append(value4)
-        if(len(self.time) > 1000):
-            self.time.pop(0)
-            self.values[0].pop(0)
-            self.values[1].pop(0)
-            self.values[2].pop(0)
-            self.values[3].pop(0)
-        if(self.counter == 10):
+        if (type(time) == type(list()) and type(value1) == type(list())):
+            self.time.extend(time)
+            self.values[0].extend(value1)
+            self.values[1].extend(value2)
+            self.values[2].extend(value3)
+            self.values[3].extend(value4)
+            while(len(self.time) > 1000):                
+                self.time.pop(0)
+                self.values[0].pop(0)
+                self.values[1].pop(0)
+                self.values[2].pop(0)
+                self.values[3].pop(0)
+        else:
+            self.time.append(time)
+            self.values[0].append(value1)
+            self.values[1].append(value2)
+            self.values[2].append(value3)
+            self.values[3].append(value4)
+            if(len(self.time) > 1000):
+                self.time.pop(0)
+                self.values[0].pop(0)
+                self.values[1].pop(0)
+                self.values[2].pop(0)
+                self.values[3].pop(0)
+        if(self.counter == 1):
             self.plotGraph()
             self.counter = 0
         self.counter += 1

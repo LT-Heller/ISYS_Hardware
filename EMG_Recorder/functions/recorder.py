@@ -13,7 +13,7 @@ class recorder:
         self.recordTime = 10
         self.pauseTime = 10
         self.lable = 0
-        self.maxLables = 4
+        self.maxLables = 3
     
     def addData(self, value1, value2, value3, value4):
         self.checkStatus()
@@ -53,16 +53,22 @@ class recorder:
         self.recording = True
         self.values = [[] for _ in range(4)]
         self.startTime = time.time()
+        
     
     def stopRecording(self):
         self.recording = False
         self.stopTime = time.time()
-        f = open(self.path + "{}test.txt".format(os.sep), "a")
-        for i in range(0, len(self.values[0])):
-            string = str(self.values[0][i]) + "," + str(self.values[1][i]) + "," + str(self.values[2][i]) + "," + str(self.values[3][i]) + "," + str(self.lable) + "\n"
-            f.write(string)
-        f.close()
+        if self.recorderIsRunning:
+            date = time.strftime("%d.%m.%Y_%H.%M.%S")
+            print(date)
+            f = open(f"{self.path}{os.sep}{date}_EMGAufzeichnung_Lable_{self.lable}.txt", "a") #f"{self.path}{os.sep}{date}_EMG-Aufzeichnung_Lable:{self.lable}.txt"
+            for i in range(0, len(self.values[0])):
+                string = str(self.values[0][i]) + "," + str(self.values[1][i]) + "," + str(self.values[2][i]) + "," + str(self.values[3][i]) + "," + str(self.lable) + "\n"
+                f.write(string)
+            f.close()
         self.values = [[] for _ in range(4)]
         self.lable += 1
         if self.lable > self.maxLables - 1:
+            self.lable = 0
+        if not self.recorderIsRunning: 
             self.lable = 0

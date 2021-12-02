@@ -1,5 +1,12 @@
 import serial
 import time
+import sys
+
+zahl = 10
+if type(zahl) == type(int()):
+    print("ja")
+    
+sys.exit(0)
 
 ser = serial.Serial()
 ser = serial.Serial()
