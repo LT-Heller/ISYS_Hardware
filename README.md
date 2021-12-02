@@ -6,18 +6,18 @@ Aufnahme von elektrischen Signalen von Muskeln, um mithilfe eines neuronalen Net
 - [x] ASCII Ausgabe von Messweten vom Arduino
 - [x] Ausgabe auf 4 ADCs begrenzen (spart Serielle Bandbreite)
 - [x] Serieller Monitor
-- [ ] Logdatei erstellen
+- [x] Logdatei erstellen
 - [x] Serieller Plotter
-- [ ] Bildausgabe für Handbewegung (Stein, Schere, Papier)
-
+- [x] Bildausgabe für Handbewegung (Stein, Schere, Papier)
+- [ ] Logdatein zusammenführen
 
 ## Zeitplan:
 - Mitte November  (18.11.2021):
-  - [ ]  Frischbier Ausarbeitung gelesen und verstanden
+  - [x]  Frischbier Ausarbeitung gelesen und verstanden
   - [ ]  Entwicklungsumgebung in Betrieb nehme(Matplot)  
 - Anfang Dezember (02.12.2021):
-  - [ ]  Daten aufnehmen
-  - [ ]  Daten aufbereiten
+  - [x]  Daten aufnehmen
+  - [x]  Daten aufbereiten
 - Mitte Dezember  (16.12.2021):
   - [ ]  Training des Netzes:
     - [ ]  Jan hat angelernt
@@ -30,6 +30,3 @@ Aufnahme von elektrischen Signalen von Muskeln, um mithilfe eines neuronalen Net
 - Mitte Januar     (13.01.2021):
   - [ ]  Ausarbeitung fertigstellen
   - [ ]  Präsentation erstellen
-
-
-Danke an Michał "mich-w" Waliszkiewicz für seinen Seriellen Monitor: https://github.com/mich-w/QtSerialMonitor
