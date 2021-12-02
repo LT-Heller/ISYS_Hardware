@@ -4,6 +4,6 @@
 .vscode/launch.json
 .vscode/ipch
 Recording_Tool/functions/__pycache__
-.vscode
+*.vscode
 *__pycache__*
 EMG_Recorder/output/main/
