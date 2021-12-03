@@ -1,11 +1,11 @@
 from PyQt5 import QtWidgets, uic, QtCore, QtGui
 from pyqtgraph import PlotWidget
 import sys
-from functions.plot import graphPlot
-from functions.QtSerial import *
+from plot import graphPlot
+from QtSerial import *
 import threading
 from time import sleep
-from functions.recorder import recorder
+from recorder import recorder
 import os
 
 class MainWindow(QtWidgets.QMainWindow):
@@ -15,7 +15,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
         #Load the UI Page
         self.currentPath = os.path.dirname(os.path.abspath(__file__))
-        uic.loadUi(self.currentPath + '/ui/main.ui', self)
+        uic.loadUi(self.currentPath + '/main.ui', self)
         
         self.st = serialTools(self)
         self.serialPorts = self.st.serial_ports()
@@ -101,7 +101,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.graph.addAndPlot(time, value, value, value, value)
         
     def setPicture(self):
-        pixmap = QtGui.QPixmap(self.currentPath + os.sep + "pictures" + os.sep + str(self.record.lable) + ".jpg")
+        pixmap = QtGui.QPixmap(self.currentPath + os.sep + str(self.record.lable) + ".jpg")
         self.labelPicture.setPixmap(pixmap)
         self.labelPicture.show()
 
@@ -110,7 +110,6 @@ def main():
     main = MainWindow()
     main.show()
     status = app.exec_()
-    #main.st.stopThread()
     sys.exit(status)
 
 if __name__ == '__main__':
