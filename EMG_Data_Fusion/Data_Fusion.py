@@ -23,7 +23,7 @@ def main():
     for file in files:
         print(f"File {files.index(file)+1}/{len(files)}")
         f = open(file, "r")
-        output_file.write((f.read() + "\n").replace(',', ';'))
+        output_file.write((f.read()).replace(',', ';'))
         f.close()
     output_file.close()
     input("Done! Press Enter to continue...")
