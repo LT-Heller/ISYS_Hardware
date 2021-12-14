@@ -28,6 +28,7 @@ class serialTools:
         self.dataType = "BYTE"                                  #STRING or BYTE
         self.state = 1
         self.by = bytes()
+        self.old_by = bytes()
         self.time = 0
         
     def __del__(self):
@@ -92,19 +93,33 @@ class serialTools:
                         self.state=3
                         # print("Blockanfang gefunden")
                     else:
-                        self.state = 1
                         print("sync fehler 2")
+                        self.state = 1
                 elif (3<=self.state and self.state <=10): # Daten aufnehmen
                         self.state=self.state+1
                         self.by+=chr
-                        if self.state%2 == 0 and chr == b'\xaa':  # Startbit während der Aufnahme
-                            print("sync fehler 3")
-                            self.state = 2
-                            self.by = bytes()
-                            self.time += 0.001
+                        if self.state%2 == 0:
+                            if chr == b'\xaa':  # Startbit während der Aufnahme
+                                print("sync fehler 3")
+                                self.state = 2
+                                self.by = bytes(self.old_by)
+                                
+                                values = (0,0,0,0)  # alte Daten übernehmen
+                                values = struct.unpack('>HHHH', self.by)
+                                self.by = bytes()
+                                dat = {'values':values,'time':self.time}
+                                self.time += 0.001
+
+                            elif chr & b'\b11111100': # fehlerhafte Bits während der Aufnahme
+                                print("error, while reading bytes")
+                                self.state = 11
+                                self.by = bytes(self.old_by)
+                                self.time += 0.001
+                                
                 if (self.state>10):
                     # print("Daten bekommen")
                     self.state=1
+                    self.old_by = bytes(self.by)
                     values = (0,0,0,0)
                     values = struct.unpack('>HHHH', self.by)
                     self.by = bytes()
