@@ -166,7 +166,7 @@ void features(vector < vector < float >>*data, int start, int stop)
 		float f_zero_count = ((float) zero_count) / framelen;
 		//printf("normalized features\n");
 		//printf("mav=%f len=%f zc=%f turns=%f ", favg, len, f_zero_count, fturns);
-		//printf("%1.6f %1.6f %1.6f %1.6f ", favg, len, f_zero_count, fturns);
+		printf("%1.6f %1.6f %1.6f %1.6f ", favg, len, f_zero_count, fturns);
 	}
 }
 
@@ -309,7 +309,7 @@ int main(int argcc, char *argvv[])
 	remove_peaks(&fdata, 1, 0, fdata[1].size());
 	remove_peaks(&fdata, 2, 0, fdata[2].size());
 	remove_peaks(&fdata, 3, 0, fdata[3].size());
-	printf(": %2.fs\n",clock() - start / CLOCKS_PER_SEC);
+	printf(": %2.fs\n",(clock() - start) / CLOCKS_PER_SEC);
 
 	printf("normieren");
 	start = clock();
@@ -317,17 +317,15 @@ int main(int argcc, char *argvv[])
 	norm(&fdata, 1, 0, fdata[1].size());
 	norm(&fdata, 2, 0, fdata[2].size());
 	norm(&fdata, 3, 0, fdata[3].size());
-	printf(": %2.fs\n",clock() - start / CLOCKS_PER_SEC);
+	printf(": %2.fs\n",(clock() - start) / CLOCKS_PER_SEC);
 
 
-	printf("berechnen der Features");
-	start = clock();
+	printf("berechnen der Features\n");
 	// bereche einen Featurevektor mit 150ms Daten
 	for (int i = 0; i < (fdata[0].size() - versatz + 1); i += versatz) {
 		features(&fdata, i, i + feature_len);
-		//printf(" %d\n", labels[i+versatz-1]);
+		printf(" %d\n", labels[i+versatz-1]);
 	}
-	printf(": %2.fs\n",clock() - start / CLOCKS_PER_SEC);
 
 	return 0;
 }
