@@ -200,7 +200,9 @@ int main(){
 	}
 	fclose(f);
 	//printf("%d Zeilen gelesen\n", len);
-	
+	float *value = *fdata;
+	//printf("%f",value[4]);
+
 	//printf("Peaks löschen\n");
 	remove_peaks(*fdata, 0, 0, len);
 	remove_peaks(*fdata, 1, 0, len);
@@ -221,8 +223,6 @@ int main(){
 		features(*fdata, i, i + feature_len);
 		printf(" %d\n", labels[i+versatz-1]);
 	}
-	
-	
 	
 	
 	return 0;	
