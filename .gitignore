@@ -7,3 +7,5 @@ Recording_Tool/functions/__pycache__
 *.vscode
 *__pycache__*
 *.spec
+*.ipynb_checkpoints
+*.python

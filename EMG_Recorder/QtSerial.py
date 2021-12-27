@@ -79,7 +79,6 @@ class serialTools:
         self.serial.close()
     
     def receive(self):
-        
         while self.serial.bytesAvailable() >= 1:
             if self.dataType == "BYTE":
                 chr=self.serial.read(1)
@@ -109,11 +108,13 @@ class serialTools:
                                 self.by = bytes()
                                 dat = {'values':values,'time':self.time}
                                 self.time += 0.001
-
-                            elif chr & b'\b11111100': # fehlerhafte Bits während der Aufnahme
-                                print("error, while reading bytes")
+                            elif chr != b'\x00' and chr != b'\x01' and chr != b'\x02' and chr != b'\x03': # fehlerhafte Bits während der Aufnahme
+                                print(f"error, while reading bytes! Chr: {chr}\tself.by: {self.by}")
                                 self.state = 11
                                 self.by = bytes(self.old_by)
+                                if len(self.by) < 8:
+                                    self.by = bytes()
+                                    self.state = 1
                                 self.time += 0.001
                                 
                 if (self.state>10):
@@ -127,29 +128,3 @@ class serialTools:
                     self.time += 0.001
                     if len(values) > 3:
                         self.queue.put(dat)
-                            
-            
-                        
-                # by= bytes()
-                # while by != 0xAA:
-                #     by = self.serial.read(1)
-                # if (self.serial.read(1) !=0xaa):
-                #     continue
-                # print("gefunden")
-                # by = self.serial.read(8)#self.serial.readLine()
-                # by = by[:8]
-                # #byy = by.split('\t')
-                
-            # else:
-            #     text = self.serial.readLine().data().decode()
-            #     text = text.rstrip('\r\n')
-            # try:
-            #     if self.dataType == "BYTE":
-            #         values = (0,0,0,0)
-            #         #for i in range(0,3):
-            #             #values[i] = int.from_bytes(byy[i],byteorder='big')
-            #         values = struct.unpack('>HHHH', self.by)
-            #     else:
-            #         values = text.split("\t")
-            # except:
-            #     pass
