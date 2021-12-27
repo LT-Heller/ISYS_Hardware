@@ -20,13 +20,9 @@ Aufnahme von elektrischen Signalen von Muskeln, um mithilfe eines neuronalen Net
   - [ ]  Entwicklungsumgebung in Betrieb nehme(Matplot)  
 - Anfang Dezember (02.12.2021):
   - [x]  Daten aufnehmen
-    - PIO Projekt im EMG-Sensor-PIO-Ordner
   - [x]  Daten aufbereiten
-  - [x]  EMG Recorder EXE 
-    - eine Datei: https://studmailwhsde-my.sharepoint.com/:u:/g/personal/nils_hochstrat_studmail_w-hs_de/ESB7t-cu--xGgFi5KqoSMdABcJ-_2TpTpCY-BPDijaR5Bw?e=FqbNSb
-    - ein Ordner mit viele kleinen Datein: https://studmailwhsde-my.sharepoint.com/:u:/g/personal/nils_hochstrat_studmail_w-hs_de/EU9l-VjcJ59Ip8eAAARAp78BdtF12FbcpOL0Gj7ub3tPUA?e=d2HwNX
+  - [ ]  EMG Recorder EXE 
   - [x]  Fusion EXE
-    - im "EMG_Data_Fusion-Ordner"
 - Mitte Dezember  (16.12.2021):
   - [ ]  Training des Netzes:
     - [ ]  Jan hat angelernt
@@ -39,3 +35,22 @@ Aufnahme von elektrischen Signalen von Muskeln, um mithilfe eines neuronalen Net
 - Mitte Januar     (13.01.2021):
   - [ ]  Ausarbeitung fertigstellen
   - [ ]  Präsentation erstellen
+
+## Positionen zum Elektrodenaufkleben
+| Channel | AIN_SEL |
+| :-----: | :-----: |
+| 0       | 1       |
+| 1       | 3       |
+| 2       | 5       |
+| 3       | 7       |
+
+Weitere einstellungen am Olimexstack:
+- 5V auswählen, ***nicht*** 3V!
+- D4/D9, REF_E und CAL ***nicht*** brücken!
+### oben
+![Elektroden oben](https://user-images.githubusercontent.com/16342158/147500835-68ff520e-373e-4e80-90be-bbeeecd310fd.jpeg)
+An der Elektrode am Handgelenk soll Masse (schwarz) einmal angeschlossen werden. Restliche schwarze Kabel nicht anschließen!
+### unten
+![Elektroden unten](https://user-images.githubusercontent.com/16342158/147500837-deea14c6-fd5a-405a-9d72-bac341e57882.jpeg)
+### Außenseite
+![Elektroden Außenseite](https://user-images.githubusercontent.com/16342158/147500838-4150cb35-9299-49eb-85b1-e9b3fcf2a000.jpeg)
