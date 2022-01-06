@@ -10,3 +10,5 @@ Recording_Tool/functions/__pycache__
 *logs
 *variables
 *models
+*.ipynb_checkpoints
+*.python

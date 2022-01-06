@@ -15,7 +15,7 @@ int frequenz = -1;		// sollte 1000 Hz sein
 int versatz = -1;		// sollte 50 Samples bei 1000Hz betragen
 int feature_len = -1;		// sollte bei 150 Samples bei 1000Hz sein
 
-float max(vector < vector < float >>*data, int spalte, int n)
+float max(vector < vector < float > >*data, int spalte, int n)
 {
 	float m = (*data)[spalte][0];
 	for (int i = 1; i < n; i++)
@@ -24,7 +24,7 @@ float max(vector < vector < float >>*data, int spalte, int n)
 	return m;
 }
 
-float min(vector < vector < float >>*data, int spalte, int n)
+float min(vector < vector < float > >*data, int spalte, int n)
 {
 	float m = (*data)[spalte][0];
 	for (int i = 1; i < n; i++)
@@ -62,7 +62,7 @@ float medianfilter(float *data, unsigned int len)
 	return (sort[1]);
 }
 
-void remove_peaks(vector < vector < float >>*data, int spalte, int start, int stop)
+void remove_peaks(vector < vector < float > >*data, int spalte, int start, int stop)
 {
 
 	float med[3];
@@ -85,7 +85,7 @@ void remove_peaks(vector < vector < float >>*data, int spalte, int start, int st
 	}
 }
 
-float avg(vector < vector < float >>*data, int spalte, int start, int stop)
+float avg(vector < vector < float > >*data, int spalte, int start, int stop)
 {
 	double m = 0.0;
 	for (int i = start; i < stop; i++)
@@ -93,7 +93,7 @@ float avg(vector < vector < float >>*data, int spalte, int start, int stop)
 	return (float) (m / ((float) (stop - start)));
 }
 
-void norm(vector < vector < float >>*data, int spalte, int start, int stop)
+void norm(vector < vector < float > >*data, int spalte, int start, int stop)
 {
 	float fmin = min(data, spalte, (*data)[spalte].size());
 	float fmax = max(data, spalte, (*data)[spalte].size());
@@ -108,7 +108,7 @@ void norm(vector < vector < float >>*data, int spalte, int start, int stop)
 	favg = avg(data, spalte, 0, (*data)[spalte].size());
 }
 
-void features(vector < vector < float >>*data, int start, int stop)
+void features(vector < vector < float > >*data, int start, int stop)
 {
 
 	float DEADZONE = 0.001;
@@ -166,7 +166,7 @@ void features(vector < vector < float >>*data, int start, int stop)
 		float f_zero_count = ((float) zero_count) / framelen;
 		//printf("normalized features\n");
 		//printf("mav=%f len=%f zc=%f turns=%f ", favg, len, f_zero_count, fturns);
-		printf("%1.6f %1.6f %1.6f %1.6f ", favg, len, f_zero_count, fturns);
+		printf("%1.6f;%1.6f;%1.6f;%1.6f;", favg, len, f_zero_count, fturns);
 	}
 }
 
@@ -253,7 +253,7 @@ int main(int argcc, char *argvv[])
 
 	parse_parameters(argcc, argvv, &datafile);
 
-	vector < vector < float >>fdata(signals, std::vector < float >());
+	vector < vector < float > >fdata(signals, std::vector < float >());
 	vector < unsigned int >labels;
 
 
