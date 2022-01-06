@@ -7,3 +7,6 @@ Recording_Tool/functions/__pycache__
 *.vscode
 *__pycache__*
 *.spec
+*logs
+*variables
+*models
