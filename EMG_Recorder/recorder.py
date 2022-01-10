@@ -62,7 +62,7 @@ class recorder:
             date = time.strftime("%d.%m.%Y_%H.%M.%S")
             if not os.path.exists(self.path):
                 os.mkdir(self.path)
-                print("Data directory created!")
+                print("Data directory created!\nPath: ", self.path)
             f = open(f"{self.path}{os.sep}{date}_EMGAufzeichnung_Lable_{self.lable}.txt", "a") #f"{self.path}{os.sep}{date}_EMG-Aufzeichnung_Lable:{self.lable}.txt"
             for i in range(0, len(self.values[0])):
                 string = str(self.values[0][i]) + "," + str(self.values[1][i]) + "," + str(self.values[2][i]) + "," + str(self.values[3][i]) + "," + str(self.lable) + "\n"
