@@ -1,37 +1,29 @@
 #include <Arduino.h>
 #include <FlexiTimer2.h>
 
-#define FREQ  1000.0
+#define FREQ  1000.0 // [Samples pro Sekunde]
 #define SAMPLING_DELAY 1.0/FREQ // [ms]
 
 void sample_data()
 {
     unsigned int ADC_Value = 0;
-    if(false){
-        Serial.print(analogRead(A0));
-        Serial.print('\t');
-        Serial.print(analogRead(A1));
-        Serial.print('\t');
-        Serial.print(analogRead(A2));
-        Serial.print('\t');
-        Serial.print(analogRead(A3));
-        Serial.print('\n');
-    }
-    else{
-        Serial.write(0xAA);
-        Serial.write(0xAA);
-        for(unsigned char CurrentCh=0;CurrentCh<4;CurrentCh++){
+    // Startbytes
+    Serial.write(0xAA);
+    Serial.write(0xAA);
+    // Datenbytes
+    for(unsigned char CurrentCh=0;CurrentCh<4;CurrentCh++){
         ADC_Value = analogRead(CurrentCh);
+        // Highbyte
         Serial.write((unsigned char)((ADC_Value & 0xFF00) >> 8));
+        // Lowbyte
         Serial.write((unsigned char)(ADC_Value & 0x00FF));
-        }
     }
 }
 
 void setup(){
     noInterrupts();
 
-    Serial.begin(2000000);
+    Serial.begin(2000000); // 2 Mbit/s
 
     pinMode(A0, INPUT);
     pinMode(A1, INPUT);
