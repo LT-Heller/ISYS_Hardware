@@ -296,7 +296,7 @@ int main(int argcc, char *argvv[])
 	fclose(f);
 
 	printf("%ld Zeilen gelesen\n", fdata[0].size());
-	printf("Example Row: %2.f %2.f %2.f %2.f\n", fdata[0][1024], fdata[1][1024], fdata[2][1024], fdata[3][1024]);
+	printf("Example Row: %2.f %2.f %2.f %2.f\n", fdata[0][0], fdata[1][0], fdata[2][0], fdata[3][0]);
 	printf("size=%ld\n", fdata.size());
 	printf("min=%2.f\n", min(&fdata, 0, fdata[0].size()));
 	printf("max=%2.f\n", max(&fdata, 0, fdata[0].size()));
